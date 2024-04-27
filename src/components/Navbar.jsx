@@ -6,6 +6,7 @@ function Navbar() {
 
   const menuItems = [
     { label: 'Our Work', target: 'our-work' },
+    { label: 'Chalo', target: 'our-work' },
     { label: 'About Us', target: 'about-us' },
     { label: 'Team', target: 'team' },
     { label: 'Reviews ', target: 'review' },
