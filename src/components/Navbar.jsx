@@ -34,7 +34,7 @@ function Navbar() {
       </div>
       <div className="sm:hidden">
         <button
-          className="block text-gray-800 hover:text-gray-900 focus:outline-none"
+          className="block text-gray-100 hover:text-gray-100 focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <svg

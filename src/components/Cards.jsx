@@ -22,6 +22,7 @@ const Reviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(null);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
+  const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,6 +34,18 @@ const Reviews = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (isLargeScreen) {
+      let max = 0;
+      document.querySelectorAll('.review-card').forEach((card) => {
+        max = Math.max(max, card.scrollHeight);
+      });
+      setMaxHeight(max);
+    } else {
+      setMaxHeight(0);
+    }
+  }, [isLargeScreen, reviews]);
 
   const handleTouchStart = (e) => {
     setTouchStartX(e.touches[0].clientX);
@@ -69,7 +82,7 @@ const Reviews = () => {
         <h2 className="text-[6vw] mb-10 font-semibold uppercase leading-none mt-10 text-4xl md:text-8xl font-['Neue_Montreal'] tracking-tight">Reviews:</h2>
         <div className="flex flex-wrap justify-center mt-8 relative" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
           {reviews.map((review, index) => (
-            <div key={review.id} className={`w-full md:w-[34vw] h-[40vh] md:h-[30vh] flex bg-[#CDEA68] shadow-md rounded-3xl overflow-hidden m-4 md:mx-auto ${index !== currentIndex ? 'hidden' : ''}`}>
+            <div key={review.id} className={`w-full md:w-[34vw] md:h-[30vh] flex bg-[#CDEA68] shadow-md rounded-3xl overflow-hidden m-4 md:mx-auto review-card ${index !== currentIndex ? 'hidden' : ''}`} style={{ maxHeight: isLargeScreen ? maxHeight + 'px' : 'none' }}>
               <div className="px-4 py-2 w-full">
                 <div className="font-bold text-xl mb-2 text-zinc-900">{review.name}</div>
                 <p className="text-gray-700 text-base">{review.comment}</p>
