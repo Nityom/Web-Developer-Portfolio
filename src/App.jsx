@@ -31,7 +31,7 @@ function App() {
       <About />
       <Eyes />
       <Featured />
-   <Profilee/>
+{/*    <Profilee/> */}
       <Cards /> 
       <Email/>   
       <Footer /> 
